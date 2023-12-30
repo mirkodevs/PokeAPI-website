@@ -6,7 +6,7 @@ import TypeBadge from "./components/TypeBadge";
 import Loader from "./components/Loader";
 
 function App() {
-  const allPokemonURL = "https://pokeapi.co/api/v2/pokemon?limit=500";
+  const allPokemonURL = "https://pokeapi.co/api/v2/pokemon?limit=250";
   const [loadPoke, setLoadPoke] = useState({
     current: "https://pokeapi.co/api/v2/pokemon?limit=40",
     next: null,
@@ -120,6 +120,8 @@ function App() {
   function resetFilter() {
     getAllUserPokemon();
   }
+const gridClass = userFetching ? "flex" : "grid"
+
   return (
     <div className="app-container">
       <Header onSearch={onSearch} />
@@ -150,14 +152,15 @@ gap-8  flex-wrap mx-auto  flex justify-center md:justify-start mb-10 uppercase  
           </section>
           </section>
         </section>
-        {!userFetching ? (
+        
           <>
             <div
-              className="gap-10 sm:w-5/6 xl:w-7/12 lg:w-12/12 lg:gap-6 md:w-5/6 md:gap-20 mx-auto all-container
-              
-             grid sm:grid-rows-auto sm:grid-cols-2 xl:grid-rows-auto xl:gap-20 xl:grid-cols-3 md:grid-rows-auto 2xl:grid-cols-4 lg:grid-cols-3 lg:grid-rows-auto"
-            >
-              {loadPoke.userPokemon.map((pokemon, index) => (
+            style={{
+display:gridClass
+
+            }}
+              className= {" grid gap-10 sm:w-5/6 xl:w-7/12 lg:w-12/12 lg:gap-6 md:w-5/6 md:gap-20 mx-auto all-container sm:grid-rows-auto sm:grid-cols-2 xl:grid-rows-auto xl:gap-20 xl:grid-cols-3 md:grid-rows-auto 2xl:grid-cols-4 lg:grid-cols-3 lg:grid-rows-auto" }>
+              {userFetching ? (<Loader/>) :  loadPoke.userPokemon.length !== 0 ? loadPoke.userPokemon.map((pokemon, index) => (
                 <PokemonThumbnail
                   id={pokemon.id}
                   name={pokemon.name}
@@ -179,8 +182,14 @@ gap-8  flex-wrap mx-auto  flex justify-center md:justify-start mb-10 uppercase  
                   bs5={pokemon.stats[4].base_stat}
                   bs6={pokemon.stats[5].base_stat}
                 />
-              ))}
+              ))
+                       :
+              <p>no pokemon</p> 
+              }
+
             </div>
+
+
 
             <section className="w-100 flex justify-center gap-4  py-10">
               <Button
@@ -195,9 +204,9 @@ gap-8  flex-wrap mx-auto  flex justify-center md:justify-start mb-10 uppercase  
               ></Button>
             </section>
           </>
-        ) : (
-          <Loader />
-        )}
+        
+
+        
       </div>
     </div>
   );
