@@ -44,7 +44,7 @@ function handleClose(){
          onClick={() => setShow(true)}
           style={{ backgroundColor: pokemonColor }}
           className=" scale-100
-        flex justify-center content-center w-56 h-56 p-10 rounded-xl relative
+        flex justify-center content-center w-64 h-64 md:w-56 md:h-56 p-10 rounded-xl relative
         hover:scale-105 ease-in-out duration-300 cursor-pointer
         "
         >
