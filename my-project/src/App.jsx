@@ -159,7 +159,7 @@ gap-8  flex-wrap mx-auto  flex justify-center md:justify-start mb-10 uppercase  
 display:gridClass
 
             }}
-              className= " grid gap-10 sm:w-5/6 xl:w-7/12 lg:w-12/12 lg:gap-6 md:w-5/6 md:gap-20 mx-auto all-container sm:grid-rows-auto sm:grid-cols-2 xl:grid-rows-auto xl:gap-20 xl:grid-cols-3 md:grid-rows-auto 2xl:grid-cols-4 lg:grid-cols-3 lg:grid-rows-auto" >
+              className= " grid gap-10 lg:gap-20 sm:w-5/6 xl:w-7/12 lg:w-12/12  md:w-6/6 md:gap-20 mx-auto all-container sm:grid-rows-auto sm:grid-cols-2 md:grid-cols-3 xl:grid-rows-auto xl:gap-20 xl:grid-cols-3 md:grid-rows-auto 2xl:grid-cols-4 lg:grid-cols-4 lg:grid-rows-auto" >
               {userFetching ? (<Loader/>) :  loadPoke.userPokemon.length !== 0 ? loadPoke.userPokemon.map((pokemon, index) => (
                 <PokemonThumbnail
                   id={pokemon.id}
