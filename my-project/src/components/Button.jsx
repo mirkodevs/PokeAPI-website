@@ -1,13 +1,14 @@
 export default function Button({
-  onClick,
+  click,
   condition,
   isPrevButton,
   isNextButton,
 }) {
+  
   const buttonClasses = "rounded-lg py-2 px-3 bg-slate-500 border-2 border-slate-500 text-white hover:bg-transparent hover:text-slate-500 duration-500";
   if (condition) {
     return (
-      <button className={buttonClasses} onClick={() => onClick()}>
+      <button className={buttonClasses} onClick={() => click()}>
         {isPrevButton ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
