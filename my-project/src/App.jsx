@@ -62,6 +62,8 @@ console.log("fetched")
   }, [fetchingState.hasUserPokemon]);
 
   return (
+
+    
     <div className="app-container">
       <Header updateLoad={setLoadPoke} allPokemon={loadPoke.allPokemon} />
 
