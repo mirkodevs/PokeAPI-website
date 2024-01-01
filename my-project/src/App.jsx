@@ -51,10 +51,10 @@ isFetching:false
     setLoadPoke((prevLoadPoke) => {
       return {
         ...prevLoadPoke,
+        userPokemon:data.fetchedPok,
         allPokemon: data.fetchedPok,
       };
     });
-    console.log("all pokemon fetched")
   }
 
 
@@ -72,7 +72,7 @@ isFetching:false
 
         <Pokemon
           userFetching={fetchingState.isFetching}
-          userPokemon={loadPoke.allPokemon}
+          userPokemon={loadPoke.userPokemon}
           updateLoad = {setLoadPoke}
           allPokemon={loadPoke.allPokemon}
         />

@@ -31,7 +31,6 @@ export const getPokemonData = async (fetchURL) => {
 
   const data = await res.json();
   async function createPokemonObject(result) {
-    console.log(data)
     let urls = [];
 result.forEach((pokemon) => {
       urls.push(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`);
@@ -48,7 +47,6 @@ result.forEach((pokemon) => {
   }
 
   const fetchedPokemon = await createPokemonObject(data.pokemon_species);
-                     console.log(fetchedPokemon)
   return {
     prev: data.previous,
     next: data.next,

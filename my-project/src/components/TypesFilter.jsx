@@ -4,7 +4,6 @@ import TypeBadge from "./TypeBadge";
 export default function TypesFilter({ updateLoad, allPokemon }) {
   function filterForType(type) {
 
-    console.log(allPokemon)
     const newUserPokemon = allPokemon.filter((pokemon) => {
       return type === pokemon.types[0].type.name;
     });
@@ -12,20 +11,17 @@ export default function TypesFilter({ updateLoad, allPokemon }) {
     updateLoad((prevLoad) => {
       return {
         ...prevLoad,
-        allPokemon: newUserPokemon,
+        userPokemon: newUserPokemon,
       };
     });
   }
 
   async function resetFilter() {
-    const { userPokemon } = await getPokemonData(
-      "https://pokeapi.co/api/v2/pokemon?limit=40"
-    );
 
     updateLoad((prev) => {
       return {
         ...prev,
-        userPokemon: userPokemon,
+        userPokemon: allPokemon
       };
     });
   }
