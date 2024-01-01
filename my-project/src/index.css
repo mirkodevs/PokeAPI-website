@@ -19,6 +19,10 @@ font-family: 'Roboto Slab', serif;
 
 
 }
+::-webkit-input-placeholder { text-align: center;}
+::-moz-input-placeholder { text-align: center;}
+::-ms-input-placeholder { text-align: center;}
+
 .font-number{
 
   font-family: 'VT323', serif;
