@@ -15,7 +15,11 @@ const pokemonColors = {
   "dragon": { color: "#e11d48" },
   "psychic": { color: "#c026d3" },
   "ice": { color: "#7dd3fc" },
-  "reset": { color: "#18181b" }
+
+  "dark": { color: "#7dd3fc" },
+  "reset": { color: "#18181b" },
+  "steel": { color: "#18181b" },
+  "flying": { color: "#18181b" }
   
 };
 

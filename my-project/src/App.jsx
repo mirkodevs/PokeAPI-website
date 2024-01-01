@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import Header from "./sections/Header";
-import TypesFilter from "./components/TypesFilter";
-import ChangePage from "./components/ChangePage";
+// import TypesFilter from "./components/TypesFilter";
+// import ChangePage from "./components/ChangePage";
 import { getPokemonData } from "./https/https";
 import Pokemon from "./components/Pokemon";
 
 function App() {
 
-  const allPokemonURL = "https://pokeapi.co/api/v2/pokemon?limit=150";
+  const allPokemonURL = "https://pokeapi.co/api/v2/pokemon?limit=500";
+  const novaGenerazioneURL = "https://pokeapi.co/api/v2/generation/9";
 const [fetchingState,setFetchingState] = useState({
 
   hasUserPokemon:false,
@@ -23,30 +24,30 @@ isFetching:false
   });
 
   
-  const getUserPokemon = async (currentPageURL) => {
-    setFetchingState(prev =>{return {...prev,isFetching:true}})
+//   const getUserPokemon = async (currentPageURL) => {
+//     setFetchingState(prev =>{return {...prev,isFetching:true}})
 
-    const data = await getPokemonData(currentPageURL);
-    setFetchingState({hasUserPokemon:true,isFetching:false})
+//     const data = await getPokemonData(currentPageURL);
+//     setFetchingState({hasUserPokemon:true,isFetching:false})
 
-    setLoadPoke((prevLoad) => {
-      return {
-        ...prevLoad,
-        next: data.next,
-        prev: data.prev,
-        userPokemon: data.fetchedPok,
-      };
-    });
-console.log("fetched")
+//     setLoadPoke((prevLoad) => {
+//       return {
+//         ...prevLoad,
+//         next: data.next,
+//         prev: data.prev,
+//         userPokemon: data.fetchedPok,
+//         allPokemon:data.fetchedPok
+//       };
+//     });
+// console.log("fetched")
 
-  };
-  useEffect(() => {
-    getUserPokemon(loadPoke.current);
-  }, [loadPoke.current]);
+//   };
+  // useEffect(() => {
+  //   getUserPokemon(loadPoke.current);
+  // }, [loadPoke.current]);
 
   async function getAllPokemon() {
-    const data = await getPokemonData(allPokemonURL);
-
+    const data = await getPokemonData(novaGenerazioneURL)
     setLoadPoke((prevLoadPoke) => {
       return {
         ...prevLoadPoke,
@@ -59,7 +60,7 @@ console.log("fetched")
 
   useEffect(() => {
     getAllPokemon();
-  }, [fetchingState.hasUserPokemon]);
+  }, []);
 
   return (
 
@@ -67,20 +68,19 @@ console.log("fetched")
     <div className="app-container">
       <Header updateLoad={setLoadPoke} allPokemon={loadPoke.allPokemon} />
 
-      <div className="pt-7 rounded-xl">
-        <TypesFilter
-          updateLoad={setLoadPoke}
-          allPokemon={loadPoke.allPokemon}
-        />
+      <div className="pt-7 rounded-xl mb-10">
+
         <Pokemon
           userFetching={fetchingState.isFetching}
-          userPokemon={loadPoke.userPokemon}
+          userPokemon={loadPoke.allPokemon}
+          updateLoad = {setLoadPoke}
+          allPokemon={loadPoke.allPokemon}
         />
-        <ChangePage 
+        {/* <ChangePage 
         updateLoad={setLoadPoke}
         prevPage = {loadPoke.prev}
         nextPage = {loadPoke.next}
-         />
+         /> */}
 
      
       </div>

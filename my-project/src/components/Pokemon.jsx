@@ -1,18 +1,22 @@
-import PokemonThumbnail from "./PokemonThumbnail"
-import Loader from "./Loader"
-export default function Pokemon({userFetching,userPokemon}){
+import PokemonThumbnail from "./PokemonThumbnail";
+import Loader from "./Loader";
+import TypesFilter from "./TypesFilter";
+export default function Pokemon({ userFetching, userPokemon,updateLoad,allPokemon }) {
+  const gridClass = userFetching ? "justify-center" : "grid";
+  const pokemon = userPokemon;
 
-    const gridClass = userFetching ? "flex" : "grid";
-const pokemon = userPokemon;
-
-    return(
-
-        <div
+  return (
+    <main>
+      <div
         style={{
           display: gridClass,
         }}
-        className=" grid gap-10 lg:gap-20 sm:w-5/6 xl:w-7/12 lg:w-12/12  md:w-6/6 md:gap-20 mx-auto all-container sm:grid-rows-auto sm:grid-cols-2 md:grid-cols-3 xl:grid-rows-auto xl:gap-20 xl:grid-cols-3 md:grid-rows-auto 2xl:grid-cols-4 lg:grid-cols-4 lg:grid-rows-auto"
+        className="grid gap-10 mx-auto   sm:w-5/6   md:gap-20 md:grid-cols-3 md:grid-rows-auto lg:grid-rows-auto lg:gap-20 lg:grid-cols-4 xl:grid-rows-auto xl:gap-20 xl:grid-cols-5 2xl:grid-cols-6  "
       >
+               <TypesFilter
+          updateLoad={updateLoad}
+          allPokemon={allPokemon}
+        />
         {userFetching ? (
           <Loader />
         ) : pokemon.length !== 0 ? (
@@ -20,7 +24,7 @@ const pokemon = userPokemon;
             <PokemonThumbnail
               id={pokemon.id}
               name={pokemon.name}
-              image={pokemon.sprites.other.dream_world.front_default}
+              image={pokemon.sprites.front_default}
               type={pokemon.types[0].type.name}
               key={index}
               height={pokemon.height}
@@ -43,8 +47,6 @@ const pokemon = userPokemon;
           <p>no pokemon</p>
         )}
       </div>
-
-)
-
-
+    </main>
+  );
 }

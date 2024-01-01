@@ -38,19 +38,21 @@ function handleClose(){
 }
 
   return (
-    <div className="flex flex-col content-ceter items-center">
+    <div className="flex flex-col content-ceter items-center ">
       <div>
+<div className="w-48 h-48">
         <div
          onClick={() => setShow(true)}
           style={{ backgroundColor: pokemonColor }}
           className=" scale-100
-        flex justify-center content-center w-64 h-64 md:w-56 md:h-56 p-10 rounded-xl relative
+        flex justify-center content-center w-full h-auto md:w-full md:h-full p-10 rounded-xl relative
         hover:scale-105 ease-in-out duration-300 cursor-pointer
         "
         >
           <div className={gradientClass} ></div>
           <img className="select-none z-2" src={image}></img>
         </div>
+</div>
         <div>
           <h4 className="mt-3 font-number size-8">#{zeros + id}</h4>
         </div>

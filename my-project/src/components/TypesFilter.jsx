@@ -3,6 +3,8 @@ import TypeBadge from "./TypeBadge";
 
 export default function TypesFilter({ updateLoad, allPokemon }) {
   function filterForType(type) {
+
+    console.log(allPokemon)
     const newUserPokemon = allPokemon.filter((pokemon) => {
       return type === pokemon.types[0].type.name;
     });
@@ -10,7 +12,7 @@ export default function TypesFilter({ updateLoad, allPokemon }) {
     updateLoad((prevLoad) => {
       return {
         ...prevLoad,
-        userPokemon: newUserPokemon,
+        allPokemon: newUserPokemon,
       };
     });
   }
@@ -28,15 +30,15 @@ export default function TypesFilter({ updateLoad, allPokemon }) {
     });
   }
   return (
-    <section className="flex justify-center  xl:px-20">
-      <section className=" xl:px-0 md:ms-20 lg:ms-20 xl:ps-6 lg:w-5/6 xl:w-11/12 px-5 max-w-7xl">
+    <section className="flex justify-center w-100 sm:col-span-2 md:col-span-3 lg:col-span-4 xl:col-span-5 2xl:col-span-6">
+      <section className="w-full">
         <h2 className="mb-5 text-2xl font-bold text-center md:text-start">
           Filter by type:
         </h2>
         <section
           className="
 md:gap-5 
-gap-8  flex-wrap mx-auto  flex justify-center md:justify-start mb-10 uppercase  select-none px-0 max-w-7xl "
+gap-8  flex-wrap mx-auto  flex justify-center md:justify-start uppercase  select-none px-0"
         >
           <TypeBadge type="grass" onSelect={filterForType} />
           <TypeBadge type="fire" onSelect={filterForType} />
