@@ -40,7 +40,7 @@ function handleClose(){
   return (
     <div className="flex flex-col content-ceter items-center ">
       <div>
-<div className="w-48 h-48">
+<div className="w-64 h-64 md:h-48 md:w-48">
         <div
          onClick={() => setShow(true)}
           style={{ backgroundColor: pokemonColor }}
