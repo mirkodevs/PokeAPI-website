@@ -44,7 +44,7 @@ export default function Pokemon({ userFetching, userPokemon,updateLoad,allPokemo
             />
           ))
         ) : (
-          <p>no pokemon</p>
+          <p className="text-center text-gray-600 font-bold">Oops! No Pokémon found. </p>
         )}
       </div>
     </main>
