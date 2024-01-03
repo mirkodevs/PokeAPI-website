@@ -8,7 +8,7 @@ import Pokemon from "./components/Pokemon";
 function App() {
 
   const allPokemonURL = "https://pokeapi.co/api/v2/pokemon?limit=500";
-  const novaGenerazioneURL = "https://pokeapi.co/api/v2/generation/9";
+  const nonaGenerazioneURL = "https://pokeapi.co/api/v2/generation/9";
 const [fetchingState,setFetchingState] = useState({
 
   hasUserPokemon:false,
@@ -47,7 +47,11 @@ isFetching:false
   // }, [loadPoke.current]);
 
   async function getAllPokemon() {
-    const data = await getPokemonData(novaGenerazioneURL)
+    setFetchingState({hasUserPokemon:true,isFetching:true})
+
+    const data = await getPokemonData(nonaGenerazioneURL)
+    setFetchingState({hasUserPokemon:true,isFetching:false})
+
     setLoadPoke((prevLoadPoke) => {
       return {
         ...prevLoadPoke,

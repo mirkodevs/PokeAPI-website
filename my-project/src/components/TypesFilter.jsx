@@ -49,6 +49,8 @@ gap-8  flex-wrap mx-auto  flex justify-center md:justify-start uppercase  select
           <TypeBadge type="rock" onSelect={filterForType} />
           <TypeBadge type="ghost" onSelect={filterForType} />
           <TypeBadge type="ice" onSelect={filterForType} />
+          <TypeBadge type="dragon" onSelect={filterForType} />
+          <TypeBadge type="steel" onSelect={filterForType} />
           <TypeBadge type="reset" onSelect={resetFilter} />
         </section>
       </section>

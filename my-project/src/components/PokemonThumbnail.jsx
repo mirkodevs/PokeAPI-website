@@ -32,27 +32,26 @@ const PokemonThumbnail = ({
   const gradientClass = `absolute z-10 bottom-0 top-0 w-full h-full rounded-xl
   bg-gradient-to-b from-transparent from-70% via-[#525252]/50 to-[#525252]/80`;
 
-function handleClose(){
-
-  setShow(false)
-}
+  function handleClose() {
+    setShow(false);
+  }
 
   return (
-    <div className="flex flex-col content-ceter items-center ">
+    <div className="flex flex-col content-ceter items-center md:items-start">
       <div>
-<div className="w-64 h-64 md:h-48 md:w-48">
-        <div
-         onClick={() => setShow(true)}
-          style={{ backgroundColor: pokemonColor }}
-          className=" scale-100
-        flex justify-center content-center w-full h-auto md:w-full md:h-full p-10 rounded-xl relative
+        <div className="w-64 h-64 md:w-48 md:h-48">
+          <div
+            onClick={() => setShow(true)}
+            style={{ backgroundColor: pokemonColor }}
+            className=" scale-100
+        flex justify-center content-center w-full h-full md:w-full md:h-full p-10 rounded-xl relative
         hover:scale-105 ease-in-out duration-300 cursor-pointer
         "
-        >
-          <div className={gradientClass} ></div>
-          <img className="select-none z-2" src={image}></img>
+          >
+            <div className={gradientClass}></div>
+            <img className="select-none z-2" src={image}></img>
+          </div>
         </div>
-</div>
         <div>
           <h4 className="mt-3 font-number size-8">#{zeros + id}</h4>
         </div>
@@ -73,8 +72,8 @@ function handleClose(){
       {show &&
         createPortal(
           <Description
-          type={type}
-          color={pokemonColor}
+            type={type}
+            color={pokemonColor}
             image={image}
             heightpok={height}
             weightpok={weight}

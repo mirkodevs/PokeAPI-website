@@ -1,4 +1,5 @@
 import { getPokemonColor } from "../utilities/getPokemonColor";
+
 export default function TypeBadge({ type,onSelect }) {
 
    const {pokemonColor,textColor} = getPokemonColor(type);
@@ -17,5 +18,12 @@ export default function TypeBadge({ type,onSelect }) {
   };
  const typeName = type[0].toUpperCase() + type.substring(1)
 
-return <div onClick={() => onSelect && onSelect(type)} style={badgeStyle}>{typeName}</div>;
+return <div onClick={() => onSelect && onSelect(type)} style={badgeStyle}>
+<span>
+
+
+
+</span>
+{typeName}
+</div>;
 }
