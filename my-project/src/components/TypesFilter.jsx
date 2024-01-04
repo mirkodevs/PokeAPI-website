@@ -5,7 +5,16 @@ export default function TypesFilter({ updateLoad, allPokemon }) {
   function filterForType(type) {
 
     const newUserPokemon = allPokemon.filter((pokemon) => {
-      return type === pokemon.types[0].type.name;
+let condition = false;
+
+pokemon.types.forEach((oneType)=> {
+if(type === oneType.type.name){condition = true}
+})
+      
+
+return condition
+
+
     });
 
     updateLoad((prevLoad) => {

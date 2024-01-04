@@ -23,6 +23,15 @@ font-family: 'Roboto Slab', serif;
 ::-moz-input-placeholder { text-align: center;}
 ::-ms-input-placeholder { text-align: center;}
 
+.pokemon-image{
+  animation: fadeIn 0.5s ;
+  
+  
+  }
+  @keyframes fadeIn {
+      0% {opacity: 0;}
+      100% {opacity: 1;}
+   } 
 .font-number{
 
   font-family: 'VT323', serif;

@@ -1,6 +1,9 @@
 import { getPokemonColor } from "../utilities/getPokemonColor";
+import SVGComponent from "./DynamicTypeSVG";
 
-export default function TypeBadge({ type,onSelect }) {
+
+
+export default function TypeBadge({ type,onSelect, }) {
 
    const {pokemonColor,textColor} = getPokemonColor(type);
  
@@ -14,16 +17,17 @@ export default function TypeBadge({ type,onSelect }) {
     textAlign: "center",
     TextTransform: "uppercase",
     fontWeight: "700",
-    cursor: onSelect && "pointer" 
+    fontSize:"15px",
+    cursor: onSelect && "pointer"
   };
  const typeName = type[0].toUpperCase() + type.substring(1)
 
-return <div onClick={() => onSelect && onSelect(type)} style={badgeStyle}>
-<span>
+return <div className="flex justify-center content-center gap-1 py-1" onClick={() => onSelect && onSelect(type)} style={badgeStyle}>
+
+<SVGComponent type={type}></SVGComponent>
 
 
-
-</span>
 {typeName}
+
 </div>;
 }

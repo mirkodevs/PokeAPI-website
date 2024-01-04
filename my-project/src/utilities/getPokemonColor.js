@@ -21,6 +21,8 @@ const colours = {
 
 export function getPokemonColor(type) {
   return {
+
     pokemonColor: colours[type] || '#777',
+    
   };
 }

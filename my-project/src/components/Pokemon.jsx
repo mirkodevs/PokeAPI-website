@@ -6,7 +6,7 @@ export default function Pokemon({ userFetching, userPokemon,updateLoad,allPokemo
   const pokemon = userPokemon;
 
   return (
-    <main>
+    <main id = "pokemon">
       <div
         style={{
           display: gridClass,
@@ -17,15 +17,13 @@ export default function Pokemon({ userFetching, userPokemon,updateLoad,allPokemo
           updateLoad={updateLoad}
           allPokemon={allPokemon}
         />
-        {userFetching ? (
-          <Loader />
-        ) : pokemon.length !== 0 ? (
+        { pokemon.length !== 0 ? (
           pokemon.map((pokemon, index) => (
             <PokemonThumbnail
               id={pokemon.id}
               name={pokemon.name}
-              image={pokemon.sprites.front_default}
-              type={pokemon.types[0].type.name}
+              image={pokemon.sprites.front_default ? pokemon.sprites.front_default : ""}
+              types={pokemon.types}
               key={index}
               height={pokemon.height}
               weight={pokemon.weight}
@@ -43,9 +41,16 @@ export default function Pokemon({ userFetching, userPokemon,updateLoad,allPokemo
               bs6={pokemon.stats[5].base_stat}
             />
           ))
-        ) : (
-          <p className="text-center text-gray-600 font-bold">Oops! No Pokémon found. </p>
-        )}
+        ) : !userFetching && (
+       <p className="text-center text-gray-600 font-bold">Oops! No Pokémon found. </p>
+        )
+        
+        }
+{userFetching && (
+          <Loader />
+        ) }
+
+
       </div>
     </main>
   );

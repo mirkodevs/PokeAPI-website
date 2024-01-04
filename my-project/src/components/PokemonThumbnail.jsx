@@ -8,7 +8,7 @@ const PokemonThumbnail = ({
   id,
   name,
   image,
-  type,
+  types,
   height,
   weight,
   stat1,
@@ -26,7 +26,7 @@ const PokemonThumbnail = ({
 }) => {
   const [show, setShow] = useState(false);
 
-  const { pokemonColor } = getPokemonColor(type);
+  const { pokemonColor } = getPokemonColor(types[0].type.name);
   const zeros = id < 10 ? "00" : id < 100 && "0";
 
   const gradientClass = `absolute z-10 bottom-0 top-0 w-full h-full rounded-xl
@@ -35,7 +35,6 @@ const PokemonThumbnail = ({
   function handleClose() {
     setShow(false);
   }
-
   return (
     <div className="flex flex-col content-ceter items-center md:items-start">
       <div>
@@ -49,14 +48,25 @@ const PokemonThumbnail = ({
         "
           >
             <div className={gradientClass}></div>
-            <img className="select-none z-2" src={image}></img>
+            <img className="select-none z-2 pokemon-image" src={image}></img>
           </div>
         </div>
         <div>
           <h4 className="mt-3 font-number size-8">#{zeros + id}</h4>
         </div>
         <h3 className="uppercase font-bold text-md my-2">{name}</h3>
-        <TypeBadge type={type} />
+        <div className="flex gap-1">
+{types.map((oneType,idx) => {
+
+return(
+
+<TypeBadge key={idx} type={oneType.type.name} />
+)
+
+})
+
+}
+</div>
         <button
           className="mt-3 bg-[#38bdf8]
         border-2 border-[#38bdf8]
@@ -72,7 +82,7 @@ const PokemonThumbnail = ({
       {show &&
         createPortal(
           <Description
-            type={type}
+            types={types}
             color={pokemonColor}
             image={image}
             heightpok={height}

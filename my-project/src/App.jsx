@@ -6,78 +6,106 @@ import { getPokemonData } from "./https/https";
 import Pokemon from "./components/Pokemon";
 
 function App() {
-
-  const allPokemonURL = "https://pokeapi.co/api/v2/pokemon?limit=500";
+  const initialPokemonURL = "https://pokeapi.co/api/v2/pokemon?limit=40";
   const nonaGenerazioneURL = "https://pokeapi.co/api/v2/generation/9";
-const [fetchingState,setFetchingState] = useState({
-
-  hasUserPokemon:false,
-isFetching:false
-})
+  const [fetchingState, setFetchingState] = useState({
+    hasUserPokemon: false,
+    isFetching: true,
+  });
 
   const [loadPoke, setLoadPoke] = useState({
-    current: "https://pokeapi.co/api/v2/pokemon?limit=40",
+    current: initialPokemonURL,
     next: null,
     prev: null,
     userPokemon: [],
     allPokemon: [],
   });
 
-  
-//   const getUserPokemon = async (currentPageURL) => {
-//     setFetchingState(prev =>{return {...prev,isFetching:true}})
+  //   const getUserPokemon = async (currentPageURL) => {
+  //     setFetchingState(prev =>{return {...prev,isFetching:true}})
 
-//     const data = await getPokemonData(currentPageURL);
-//     setFetchingState({hasUserPokemon:true,isFetching:false})
+  //     const data = await getPokemonData(currentPageURL);
+  //     setFetchingState({hasUserPokemon:true,isFetching:false})
 
-//     setLoadPoke((prevLoad) => {
-//       return {
-//         ...prevLoad,
-//         next: data.next,
-//         prev: data.prev,
-//         userPokemon: data.fetchedPok,
-//         allPokemon:data.fetchedPok
-//       };
-//     });
-// console.log("fetched")
+  //     setLoadPoke((prevLoad) => {
+  //       return {
+  //         ...prevLoad,
+  //         next: data.next,
+  //         prev: data.prev,
+  //         userPokemon: data.fetchedPok,
+  //         allPokemon:data.fetchedPok
+  //       };
+  //     });
+  // console.log("fetched")
 
-//   };
+  //   };
   // useEffect(() => {
   //   getUserPokemon(loadPoke.current);
   // }, [loadPoke.current]);
 
   async function getAllPokemon() {
-    setFetchingState({hasUserPokemon:true,isFetching:true})
+    setFetchingState({ hasUserPokemon: true, isFetching: true });
 
-    const data = await getPokemonData(nonaGenerazioneURL)
-    setFetchingState({hasUserPokemon:true,isFetching:false})
-
+    const data = await getPokemonData(loadPoke.current);
+    const actualUserPokemon = loadPoke.userPokemon;
+    console.log(actualUserPokemon)
     setLoadPoke((prevLoadPoke) => {
       return {
         ...prevLoadPoke,
-        userPokemon:data.fetchedPok,
+        next: data.next,
+        prev: data.prev,
+        userPokemon: [...actualUserPokemon,...data.fetchedPok] ,
         allPokemon: data.fetchedPok,
       };
+      
     });
-  }
+    setFetchingState({ hasUserPokemon: true, isFetching: false });
 
+  }
 
   useEffect(() => {
     getAllPokemon();
+  }, [loadPoke.current]);
+
+  const [scrollPercentage, setScrollPercentage] = useState(0);
+
+  const handleScroll = () => {
+    const windowHeight = window.innerHeight;
+    const totalHeight = document.documentElement.scrollHeight;
+    const scrolled = window.scrollY;
+    const maxScroll = totalHeight - windowHeight;
+    const scrolledPercentage = (scrolled / maxScroll) * 100;
+
+    setScrollPercentage(scrolledPercentage);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
-  return (
+  useEffect(() => {
+    if (scrollPercentage > 95) {
+      setLoadPoke((prevLoad) => {
+        return {
+          ...prevLoad,
+          current: loadPoke.next,
+        };
+      });
+    }
+  }, [scrollPercentage]);
 
-    
+  return (
     <div className="app-container">
       <Header updateLoad={setLoadPoke} allPokemon={loadPoke.allPokemon} />
 
       <div className="pt-7 rounded-xl mb-10">
-
         <Pokemon
           userFetching={fetchingState.isFetching}
           userPokemon={loadPoke.userPokemon}
-          updateLoad = {setLoadPoke}
+          updateLoad={setLoadPoke}
           allPokemon={loadPoke.allPokemon}
         />
         {/* <ChangePage 
@@ -85,11 +113,7 @@ isFetching:false
         prevPage = {loadPoke.prev}
         nextPage = {loadPoke.next}
          /> */}
-
-     
       </div>
-
-
     </div>
   );
 }
