@@ -7,7 +7,7 @@ import "./index.css"
 function App() {
   const initialPokemonURL = "https://pokeapi.co/api/v2/pokemon?limit=40";
   const nonaGenerazioneURL = "https://pokeapi.co/api/v2/generation/9";
-  const allPokemonURL = "https://pokeapi.co/api/v2/pokemon?limit=1301";
+  const allPokemonURL = "https://pokeapi.co/api/v2/pokemon?limit=350";
   const [fetchingState, setFetchingState] = useState({
     hasUserPokemon: false,
     isFetching: true,
