@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import Header from "./sections/Header";
-// import TypesFilter from "./components/TypesFilter";
-// import ChangePage from "./components/ChangePage";
 import { getPokemonData } from "./https/https";
 import Pokemon from "./components/Pokemon";
+import "./index.css"
 
 function App() {
   const initialPokemonURL = "https://pokeapi.co/api/v2/pokemon?limit=40";
@@ -12,7 +11,7 @@ function App() {
   const [fetchingState, setFetchingState] = useState({
     hasUserPokemon: false,
     isFetching: true,
-    isFiltered:false
+    isFiltered: false,
   });
 
   const [loadPoke, setLoadPoke] = useState({
@@ -21,10 +20,7 @@ function App() {
     prev: null,
     userPokemon: [],
     allPokemon: [],
-
   });
-
-
 
   async function getPokemon() {
     setFetchingState({ hasUserPokemon: false, isFetching: true });
@@ -36,27 +32,20 @@ function App() {
         ...prevLoadPoke,
         next: data.next,
         prev: data.prev,
-        userPokemon: [...actualUserPokemon,...data.fetchedPok] ,
+        userPokemon: [...actualUserPokemon, ...data.fetchedPok],
       };
-      
     });
     setFetchingState({ hasUserPokemon: true, isFetching: false });
-
   }
-async function getAllPokemon(){
-
-  const data = await getPokemonData(allPokemonURL);
-  setLoadPoke((prevLoadPoke) => {
-    return {
-      ...prevLoadPoke,
-      allPokemon: data.fetchedPok,
-    };
-    
-  });
-
-
-}
-
+  async function getAllPokemon() {
+    const data = await getPokemonData(allPokemonURL);
+    setLoadPoke((prevLoadPoke) => {
+      return {
+        ...prevLoadPoke,
+        allPokemon: data.fetchedPok,
+      };
+    });
+  }
 
   useEffect(() => {
     getPokemon();
@@ -65,7 +54,6 @@ async function getAllPokemon(){
   useEffect(() => {
     getAllPokemon();
   }, []);
-
 
   const [scrollPercentage, setScrollPercentage] = useState(0);
 
@@ -87,7 +75,7 @@ async function getAllPokemon(){
   }, []);
 
   useEffect(() => {
-    if (scrollPercentage > 95 && !fetchingState.isFiltered ) {
+    if (scrollPercentage > 95 && !fetchingState.isFiltered) {
       setLoadPoke((prevLoad) => {
         return {
           ...prevLoad,
@@ -99,9 +87,11 @@ async function getAllPokemon(){
 
   return (
     <div className="app-container">
-      <Header updateLoad={setLoadPoke} allPokemon={loadPoke.allPokemon} 
-          updateUserFetching={setFetchingState}
-       />
+      <Header
+        updateLoad={setLoadPoke}
+        allPokemon={loadPoke.allPokemon}
+        updateUserFetching={setFetchingState}
+      />
 
       <div className="pt-7 rounded-xl mb-10">
         <Pokemon
