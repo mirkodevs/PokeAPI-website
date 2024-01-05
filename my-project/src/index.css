@@ -2,14 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-
-@import url('https://fonts.googleapis.com/css2?family=Onest:wght@500;700&family=Playfair+Display:wght@500&family=Poppins:wght@500&display=swap');
-
 #root {
 
   --progress-color: red;
 
 
+}
+
+.font-number {
+
+  font-family: 'VT323', serif;
+  font-size: 28px;
+  font-weight: 700;
 }
 
 body {
@@ -48,12 +52,7 @@ body {
   }
 }
 
-.font-number {
 
-  font-family: 'VT323', serif;
-  font-size: 28px;
-  font-weight: 700;
-}
 
 progress[value]::-webkit-progress-bar {
   background-color: #d1d5db;
@@ -414,4 +413,18 @@ progress[value]::-webkit-progress-value::before {
   100% {
     background: #93c5fd;
   }
+}
+#toLeft,#toRight{
+
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+z-index: 111;
+border:0px solid;
+cursor: pointer;
+
+}
+#toRight{
+right: 0;
+
 }

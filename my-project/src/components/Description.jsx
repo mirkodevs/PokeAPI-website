@@ -32,6 +32,8 @@ const Description = ({
       ></div>
 
       <section className="bg-[#f8fafc] z-60 relative xl:w-4/12 2xl:w-3/12 lg:w-5/12 md:w-6/12  rounded-2xl pb-10 w-5/6 ">
+  
+
         <div className="flex flex-col ">
           <section
             style={{

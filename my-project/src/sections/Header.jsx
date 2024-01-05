@@ -34,7 +34,7 @@ export default function Header({updateLoad, allPokemon, updateUserFetching }) {
 
   return (
     <header className="flex justify-center flex-col">
-      <section className=" bg-[#38bdf8] py-8 pb-7 flex flex-col justify-center content-center">
+      <section className=" bg-[#38bdf8] py-20  flex flex-col justify-center content-center">
         <section className="w-100 flex justify-center py-5">
           <img width={256} src={PokeApiIMG}></img>
         </section>
