@@ -46,7 +46,7 @@ export default function TypesFilter({
     updateLoad((prev) => {
       return {
         ...prev,
-        userPokemon: allPokemon,
+        userPokemon: allPokemon.slice(0,40),
       };
     });
   }
