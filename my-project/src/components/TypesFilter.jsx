@@ -1,36 +1,52 @@
 import { getPokemonData } from "../https/https";
 import TypeBadge from "./TypeBadge";
+import { getPokemonForType } from "../https/https";
+export default function TypesFilter({
+  updateFetching,
+  updateLoad,
+  allPokemon,
+}) {
+  // function filterForType(type) {
+  //   const newUserPokemon = allPokemon.filter((pokemon) => {
+  //     let condition = false;
 
-export default function TypesFilter({ updateLoad, allPokemon }) {
-  function filterForType(type) {
+  //     pokemon.types.forEach((oneType) => {
+  //       if (type === oneType.type.name) {
+  //         condition = true;
+  //       }
+  //     });
 
-    const newUserPokemon = allPokemon.filter((pokemon) => {
-let condition = false;
+  //     return condition;
+  //   });
 
-pokemon.types.forEach((oneType)=> {
-if(type === oneType.type.name){condition = true}
-})
-      
+  //   updateLoad((prevLoad) => {
+  //     return {
+  //       ...prevLoad,
+  //       userPokemon: newUserPokemon,
+  //     };
+  //   });
+  // }
 
-return condition
+  async   function filterForType(type) {
+    updateFetching({ hasUserPokemon: false, isFetching: true, isFiltered:true });
 
-
-    });
-
+    const newUserPokemon = await getPokemonForType(type);
     updateLoad((prevLoad) => {
       return {
         ...prevLoad,
         userPokemon: newUserPokemon,
       };
     });
+    updateFetching({ hasUserPokemon: true, isFetching: false,isFiltered:true});
+
   }
 
   async function resetFilter() {
-
+    updateFetching({ hasUserPokemon: true, isFetching: true, isFiltered:false });
     updateLoad((prev) => {
       return {
         ...prev,
-        userPokemon: allPokemon
+        userPokemon: allPokemon,
       };
     });
   }

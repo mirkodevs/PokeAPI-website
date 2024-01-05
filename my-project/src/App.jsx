@@ -11,6 +11,7 @@ function App() {
   const [fetchingState, setFetchingState] = useState({
     hasUserPokemon: false,
     isFetching: true,
+    isFiltered:false
   });
 
   const [loadPoke, setLoadPoke] = useState({
@@ -19,36 +20,14 @@ function App() {
     prev: null,
     userPokemon: [],
     allPokemon: [],
+
   });
-
-  //   const getUserPokemon = async (currentPageURL) => {
-  //     setFetchingState(prev =>{return {...prev,isFetching:true}})
-
-  //     const data = await getPokemonData(currentPageURL);
-  //     setFetchingState({hasUserPokemon:true,isFetching:false})
-
-  //     setLoadPoke((prevLoad) => {
-  //       return {
-  //         ...prevLoad,
-  //         next: data.next,
-  //         prev: data.prev,
-  //         userPokemon: data.fetchedPok,
-  //         allPokemon:data.fetchedPok
-  //       };
-  //     });
-  // console.log("fetched")
-
-  //   };
-  // useEffect(() => {
-  //   getUserPokemon(loadPoke.current);
-  // }, [loadPoke.current]);
-
-  async function getAllPokemon() {
+  async function getPokemon() {
     setFetchingState({ hasUserPokemon: true, isFetching: true });
 
     const data = await getPokemonData(loadPoke.current);
     const actualUserPokemon = loadPoke.userPokemon;
-    console.log(actualUserPokemon)
+    // console.log(actualUserPokemon)
     setLoadPoke((prevLoadPoke) => {
       return {
         ...prevLoadPoke,
@@ -64,7 +43,7 @@ function App() {
   }
 
   useEffect(() => {
-    getAllPokemon();
+    getPokemon();
   }, [loadPoke.current]);
 
   const [scrollPercentage, setScrollPercentage] = useState(0);
@@ -87,7 +66,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (scrollPercentage > 95) {
+    if (scrollPercentage > 95 && !fetchingState.isFiltered ) {
       setLoadPoke((prevLoad) => {
         return {
           ...prevLoad,
@@ -103,10 +82,11 @@ function App() {
 
       <div className="pt-7 rounded-xl mb-10">
         <Pokemon
-          userFetching={fetchingState.isFetching}
+          fetchingState={fetchingState}
           userPokemon={loadPoke.userPokemon}
           updateLoad={setLoadPoke}
           allPokemon={loadPoke.allPokemon}
+          updateUserFetching={setFetchingState}
         />
         {/* <ChangePage 
         updateLoad={setLoadPoke}

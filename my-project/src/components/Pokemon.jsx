@@ -1,7 +1,7 @@
 import PokemonThumbnail from "./PokemonThumbnail";
 import Loader from "./Loader";
 import TypesFilter from "./TypesFilter";
-export default function Pokemon({ userFetching, userPokemon,updateLoad,allPokemon }) {
+export default function Pokemon({updateUserFetching, fetchingState, userPokemon,updateLoad,allPokemon }) {
   const pokemon = userPokemon;
 
   return (
@@ -13,8 +13,10 @@ export default function Pokemon({ userFetching, userPokemon,updateLoad,allPokemo
                <TypesFilter
           updateLoad={updateLoad}
           allPokemon={allPokemon}
+          updateFetching = {updateUserFetching}
+          fetchingState = {fetchingState}
         />
-        { pokemon.length !== 0 ? (
+        { pokemon.length !== 0 && fetchingState.hasUserPokemon ? (
           pokemon.map((pokemon, index) => (
             <PokemonThumbnail
               id={pokemon.id}
@@ -38,7 +40,7 @@ export default function Pokemon({ userFetching, userPokemon,updateLoad,allPokemo
               bs6={pokemon.stats[5].base_stat}
             />
           ))
-        ) : !userFetching && (
+        ) : !fetchingState.isFetching  && (
        <p className="text-center text-gray-600 font-bold">Oops! No Pokémon found. </p>
         )
         
@@ -47,7 +49,7 @@ export default function Pokemon({ userFetching, userPokemon,updateLoad,allPokemo
 
 
       </div>
-      {userFetching && (
+      {fetchingState.isFetching && (
           <Loader />
         ) }
     </main>
