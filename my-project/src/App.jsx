@@ -8,6 +8,7 @@ import Pokemon from "./components/Pokemon";
 function App() {
   const initialPokemonURL = "https://pokeapi.co/api/v2/pokemon?limit=40";
   const nonaGenerazioneURL = "https://pokeapi.co/api/v2/generation/9";
+  const allPokemonURL = "https://pokeapi.co/api/v2/pokemon?limit=1301";
   const [fetchingState, setFetchingState] = useState({
     hasUserPokemon: false,
     isFetching: true,
@@ -22,9 +23,11 @@ function App() {
     allPokemon: [],
 
   });
-  async function getPokemon() {
-    setFetchingState({ hasUserPokemon: true, isFetching: true });
 
+
+
+  async function getPokemon() {
+    setFetchingState({ hasUserPokemon: false, isFetching: true });
     const data = await getPokemonData(loadPoke.current);
     const actualUserPokemon = loadPoke.userPokemon;
     // console.log(actualUserPokemon)
@@ -34,17 +37,35 @@ function App() {
         next: data.next,
         prev: data.prev,
         userPokemon: [...actualUserPokemon,...data.fetchedPok] ,
-        allPokemon: data.fetchedPok,
       };
       
     });
     setFetchingState({ hasUserPokemon: true, isFetching: false });
 
   }
+async function getAllPokemon(){
+
+  const data = await getPokemonData(allPokemonURL);
+  setLoadPoke((prevLoadPoke) => {
+    return {
+      ...prevLoadPoke,
+      allPokemon: data.fetchedPok,
+    };
+    
+  });
+
+
+}
+
 
   useEffect(() => {
     getPokemon();
   }, [loadPoke.current]);
+
+  useEffect(() => {
+    getAllPokemon();
+  }, []);
+
 
   const [scrollPercentage, setScrollPercentage] = useState(0);
 
@@ -78,7 +99,9 @@ function App() {
 
   return (
     <div className="app-container">
-      <Header updateLoad={setLoadPoke} allPokemon={loadPoke.allPokemon} />
+      <Header updateLoad={setLoadPoke} allPokemon={loadPoke.allPokemon} 
+          updateUserFetching={setFetchingState}
+       />
 
       <div className="pt-7 rounded-xl mb-10">
         <Pokemon

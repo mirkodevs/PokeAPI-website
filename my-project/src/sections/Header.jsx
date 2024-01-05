@@ -1,8 +1,21 @@
 import PokeApiIMG from "../assets/logo.svg";
 
-export default function Header({ updateLoad, allPokemon }) {
+export default function Header({ updateLoad, allPokemon,updateUserFetching }) {
   function handleChange(e) {
+
+
+
     const value = e.target.value;
+
+  if(value === ""){
+   updateUserFetching({ hasUserPokemon: true, isFetching: false,isFiltered:false});
+
+
+  }else{
+    updateUserFetching({ hasUserPokemon: true, isFetching: false,isFiltered:true});
+
+
+  }
     const newUserPokemon = allPokemon.filter((pokemon) => {
       return pokemon.name.startsWith(value.toLowerCase());
     });
