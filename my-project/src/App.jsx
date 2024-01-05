@@ -27,7 +27,7 @@ function App() {
 
 
   async function getPokemon() {
-    setFetchingState({ hasUserPokemon: false, isFetching: true });
+    setFetchingState({ hasUserPokemon: true, isFetching: true });
     const data = await getPokemonData(loadPoke.current);
     const actualUserPokemon = loadPoke.userPokemon;
     // console.log(actualUserPokemon)
