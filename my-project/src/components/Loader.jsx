@@ -1,7 +1,7 @@
 export default function Loader(){
 return(
 
-<section className="flex h-64 content-center relative flex-col justify-end py-10 gap-5  w-full col-span-4 xl:col-span-5 2xl:col-span-6" >
+<section className="mt-10 flex h-64 content-center relative flex-col justify-end py-10 gap-5  w-full col-span-4 xl:col-span-5 2xl:col-span-6" >
     
 <div className="socket mb-10">
   <div className="gel center-gel">

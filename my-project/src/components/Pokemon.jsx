@@ -2,15 +2,12 @@ import PokemonThumbnail from "./PokemonThumbnail";
 import Loader from "./Loader";
 import TypesFilter from "./TypesFilter";
 export default function Pokemon({ userFetching, userPokemon,updateLoad,allPokemon }) {
-  const gridClass = userFetching ? "justify-center" : "grid";
   const pokemon = userPokemon;
 
   return (
     <main id = "pokemon">
       <div
-        style={{
-          display: gridClass,
-        }}
+
         className="grid gap-10 mx-auto   sm:w-5/6   md:gap-20 md:grid-cols-3 md:grid-rows-auto lg:grid-rows-auto lg:gap-20 lg:grid-cols-4 xl:grid-rows-auto xl:gap-20 xl:grid-cols-5 2xl:grid-cols-6  "
       >
                <TypesFilter
@@ -46,12 +43,13 @@ export default function Pokemon({ userFetching, userPokemon,updateLoad,allPokemo
         )
         
         }
-{userFetching && (
-          <Loader />
-        ) }
+
 
 
       </div>
+      {userFetching && (
+          <Loader />
+        ) }
     </main>
   );
 }
