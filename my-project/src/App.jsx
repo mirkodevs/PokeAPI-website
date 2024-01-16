@@ -23,7 +23,7 @@ function App() {
   });
 
   async function getPokemon() {
-    setFetchingState({ hasUserPokemon: false, isFetching: true });
+    setFetchingState((prev) =>{ return { ...prev, isFetching: true }});
     const data = await getPokemonData(loadPoke.current);
     const actualUserPokemon = loadPoke.userPokemon;
     // console.log(actualUserPokemon)
@@ -36,6 +36,7 @@ function App() {
       };
     });
     setFetchingState({ hasUserPokemon: true, isFetching: false });
+
   }
   async function getAllPokemon() {
     const data = await getPokemonData(allPokemonURL);
